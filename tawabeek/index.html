@@ -1,0 +1,46 @@
+---
+layout: default
+title: تطبيقات
+description: "تصفّح أحدث التطبيقات التقنية والبرمجية على منصة عالم تقني."
+permalink: /tawabeek/
+---
+<div class="page-header reveal">
+  <h1>التطبيقات</h1>
+  <p>تصفّح أحدث التطبيقات التقنية والبرمجية</p>
+  <div class="breadcrumb">
+    <a href="{{ site.baseurl }}/"><i class="fa-solid fa-house"></i> الرئيسية</a>
+    <i class="fa-solid fa-chevron-left"></i>
+    <span>تطبيقات</span>
+  </div>
+</div>
+
+<section>
+  <div class="container">
+    {% assign projects = site.projects | sort: "date" | reverse %}
+    {% if projects.size > 0 %}
+    <div class="content-grid">
+      {% for project in projects %}
+      <a href="{{ project.url | prepend: site.baseurl }}" class="content-card reveal">
+        <div class="content-card-thumb" style="background: var(--gradient);">
+          <i class="fa-solid {{ project.icon | default: 'fa-mobile-screen' }}"></i>
+        </div>
+        <div class="content-card-body">
+          <h3>{{ project.title }}</h3>
+          <p>{{ project.description }}</p>
+          <div class="content-card-meta">
+            <span class="date"><i class="fa-solid fa-calendar"></i> {{ project.date | date: '%Y-%m-%d' }}</span>
+            {% if project.version %}<span><i class="fa-solid fa-code-branch"></i> {{ project.version }}</span>{% endif %}
+          </div>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty-state reveal">
+      <i class="fa-solid fa-mobile-screen"></i>
+      <h3>لا توجد تطبيقات بعد</h3>
+      <p>ستُضاف التطبيقات قريبًا. تابعنا!</p>
+    </div>
+    {% endif %}
+  </div>
+</section>

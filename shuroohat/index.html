@@ -1,0 +1,72 @@
+---
+layout: default
+title: شروحات
+description: "تصفّح أحدث الشروحات والمقالات التقنية على منصة عالم تقني."
+permalink: /shuroohat/
+---
+<div class="page-header reveal">
+  <h1>الشروحات</h1>
+  <p>تصفّح أحدث المقالات والشروحات التقنية</p>
+  <div class="breadcrumb">
+    <a href="{{ site.baseurl }}/"><i class="fa-solid fa-house"></i> الرئيسية</a>
+    <i class="fa-solid fa-chevron-left"></i>
+    <span>شروحات</span>
+  </div>
+</div>
+
+<section>
+  <div class="container">
+    {% if site.posts.size > 0 %}
+    <div class="content-grid">
+      {% for post in site.posts %}
+      <a href="{{ post.url | prepend: site.baseurl }}" class="content-card reveal">
+        <div class="content-card-thumb" style="background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);">
+          <i class="fa-solid fa-newspaper"></i>
+        </div>
+        <div class="content-card-body">
+          <h3>{{ post.title }}</h3>
+          <p>{{ post.excerpt | strip_html | truncatewords: 15 }}</p>
+          <div class="content-card-meta">
+            <span class="date"><i class="fa-solid fa-calendar"></i> {{ post.date | date: '%Y-%m-%d' }}</span>
+            {% if post.category %}<span><i class="fa-solid fa-folder"></i> {{ post.category }}</span>{% endif %}
+          </div>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+
+    {% if paginator.total_pages > 1 %}
+    <div class="pagination">
+      {% if paginator.previous_page %}
+      <a href="{{ paginator.previous_page_path | prepend: site.baseurl }}"><i class="fa-solid fa-chevron-right"></i></a>
+      {% else %}
+      <span class="disabled"><i class="fa-solid fa-chevron-right"></i></span>
+      {% endif %}
+
+      {% for page in (1..paginator.total_pages) %}
+      {% if page == paginator.page %}
+      <span class="current">{{ page }}</span>
+      {% elsif page == 1 %}
+      <a href="{{ site.baseurl }}/shuroohat/">1</a>
+      {% else %}
+      <a href="{{ site.baseurl }}/shuroohat/page{{ page }}">{{ page }}</a>
+      {% endif %}
+      {% endfor %}
+
+      {% if paginator.next_page %}
+      <a href="{{ paginator.next_page_path | prepend: site.baseurl }}"><i class="fa-solid fa-chevron-left"></i></a>
+      {% else %}
+      <span class="disabled"><i class="fa-solid fa-chevron-left"></i></span>
+      {% endif %}
+    </div>
+    {% endif %}
+
+    {% else %}
+    <div class="empty-state reveal">
+      <i class="fa-solid fa-book-open"></i>
+      <h3>لا توجد شروحات بعد</h3>
+      <p>ستُضاف الشروحات قريبًا. تابعنا!</p>
+    </div>
+    {% endif %}
+  </div>
+</section>

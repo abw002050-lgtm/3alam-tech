@@ -1,0 +1,66 @@
+# ===== إعدادات Jekyll لموقع «عالم تقني» =====
+title: "عالم تقني"
+description: "منصة تقدّم خدمات تقنية وبرمجية متعددة: تطبيقات، شروحات، مقالات تقنية، وأدوات عصرية."
+author: "عاصم محمد"
+lang: ar
+dir: rtl
+
+# رابط الموقع على GitHub Pages
+url: "https://abw002050-lgtm.github.io"
+baseurl: "/3alam-tech"
+
+# معلومات التواصل
+whatsapp: "00967735383729"
+location: "اليمن"
+github_repo: "https://github.com/abw002050-lgtm/3alam-tech"
+
+# محرك Markdown
+markdown: kramdown
+highlighter: rouge
+
+# روابط نظيفة للمقالات
+permalink: /shuroohat/:year/:month/:day/:title:output_ext
+
+# الإضافات المسموحة على GitHub Pages
+plugins:
+  - jekyll-sitemap
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-paginate
+  - jekyll-redirect-from
+
+# ===== المجموعات (Collections) =====
+collections:
+  projects:
+    output: true
+    permalink: /tawabeek/:name/
+
+# ===== الإعدادات الافتراضية للصفحات =====
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "projects"
+    values:
+      layout: "project"
+  - scope:
+      path: ""
+    values:
+      layout: "default"
+
+# إعدادات الترقيم
+paginate: 6
+paginate_path: "/shuroohat/page:num/"
+
+# استبعاد الملفات غير الضرورية
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - node_modules
+  - .gitignore
+  - vendor

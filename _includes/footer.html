@@ -1,0 +1,16 @@
+<footer>
+  <div class="footer-socials">
+    <a href="{{ site.baseurl }}/#contact" aria-label="تواصل"><i class="fa-solid fa-envelope"></i></a>
+    <a href="https://wa.me/{{ site.whatsapp }}" target="_blank" rel="noopener" aria-label="واتساب"><i class="fa-brands fa-whatsapp"></i></a>
+    <a href="{{ site.github_repo }}" target="_blank" rel="noopener" aria-label="غيت هاب"><i class="fa-brands fa-github"></i></a>
+  </div>
+  <p class="footer-text">
+    © {{ site.time | date: '%Y' }} {{ site.title }} — جميع الحقوق محفوظة — صُنع بـ <span class="heart">♥</span>
+  </p>
+</footer>
+
+<button class="back-to-top" id="backToTop" aria-label="العودة للأعلى">
+  <i class="fa-solid fa-arrow-up"></i>
+</button>
+
+<script src="{{ '/assets/js/main.js' | relative_url }}"></script>

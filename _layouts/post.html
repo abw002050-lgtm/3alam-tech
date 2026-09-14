@@ -1,0 +1,55 @@
+---
+layout: default
+---
+<article class="article-wrap">
+  <div class="article-header reveal">
+    <h1>{{ page.title }}</h1>
+    <div class="article-meta">
+      <span><i class="fa-solid fa-user"></i> {{ site.author }}</span>
+      <span><i class="fa-solid fa-calendar"></i> {{ page.date | date: '%Y-%m-%d' }}</span>
+      {% if page.category %}<span><i class="fa-solid fa-folder"></i> {{ page.category }}</span>{% endif %}
+    </div>
+  </div>
+
+  <div class="article-content reveal">
+    {{ content }}
+  </div>
+
+  {% if page.tags.size > 0 %}
+  <div class="post-tags reveal" style="margin-top: 30px;">
+    {% for tag in page.tags %}<span class="tag">{{ tag }}</span>{% endfor %}
+  </div>
+  {% endif %}
+
+  <div class="share-buttons reveal">
+    <span>شارك المقال:</span>
+    {% assign share_url = page.url | prepend: site.baseurl | prepend: site.url %}
+    <button class="share-btn" data-type="whatsapp" data-url="{{ share_url }}" data-title="{{ page.title }}" aria-label="واتساب"><i class="fa-brands fa-whatsapp"></i></button>
+    <button class="share-btn" data-type="telegram" data-url="{{ share_url }}" data-title="{{ page.title }}" aria-label="تليغرام"><i class="fa-brands fa-telegram"></i></button>
+    <button class="share-btn" data-type="twitter" data-url="{{ share_url }}" data-title="{{ page.title }}" aria-label="إكس"><i class="fa-brands fa-x-twitter"></i></button>
+    <button class="share-btn" data-type="copy" data-url="{{ share_url }}" aria-label="نسخ الرابط"><i class="fa-solid fa-link"></i></button>
+  </div>
+</article>
+
+<section style="padding-top: 0;">
+  <div class="container">
+    <div class="content-grid">
+      {% assign related = site.posts | where: "category", page.category | where_exp: "item", "item.url != page.url" | limit: 2 %}
+      {% for post in related %}
+      <a href="{{ post.url | prepend: site.baseurl }}" class="content-card reveal">
+        <div class="content-card-thumb" style="background: var(--gradient);">
+          <i class="fa-solid fa-newspaper"></i>
+        </div>
+        <div class="content-card-body">
+          <h3>{{ post.title }}</h3>
+          <p>{{ post.excerpt | strip_html | truncatewords: 15 }}</p>
+          <div class="content-card-meta">
+            <span class="date"><i class="fa-solid fa-calendar"></i> {{ post.date | date: '%Y-%m-%d' }}</span>
+            <span><i class="fa-solid fa-arrow-left"></i> اقرأ</span>
+          </div>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>

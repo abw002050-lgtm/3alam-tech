@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://abw002050-lgtm.github.io/3alam-tech/sitemap.xml

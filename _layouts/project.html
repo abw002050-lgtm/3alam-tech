@@ -1,0 +1,53 @@
+---
+layout: default
+---
+<div class="project-wrap">
+  <div class="page-header reveal">
+    <div class="breadcrumb">
+      <a href="{{ site.baseurl }}/"><i class="fa-solid fa-house"></i> الرئيسية</a>
+      <i class="fa-solid fa-chevron-left"></i>
+      <a href="{{ site.baseurl }}/tawabeek/">تطبيقات</a>
+      <i class="fa-solid fa-chevron-left"></i>
+      <span>{{ page.title }}</span>
+    </div>
+    <h1>{{ page.title }}</h1>
+    <p>{{ page.description }}</p>
+  </div>
+
+  <div class="container" style="padding: 0 0 40px;">
+    <div class="project-hero reveal">
+      <i class="fa-solid {{ page.icon | default: 'fa-mobile-screen' }}"></i>
+    </div>
+
+    <div class="project-info reveal">
+      {% if page.version %}<div class="project-info-item"><i class="fa-solid fa-code-branch"></i> الإصدار: {{ page.version }}</div>{% endif %}
+      {% if page.platform %}<div class="project-info-item"><i class="fa-solid fa-laptop"></i> المنصة: {{ page.platform }}</div>{% endif %}
+      <div class="project-info-item"><i class="fa-solid fa-calendar"></i> {{ page.date | date: '%Y-%m-%d' }}</div>
+    </div>
+
+    {% if page.download %}
+    <a href="{{ page.download }}" class="project-download reveal" target="_blank" rel="noopener">
+      <i class="fa-solid fa-download"></i> تحميل التطبيق
+    </a>
+    {% endif %}
+
+    <div class="article-content reveal">
+      {{ content }}
+    </div>
+
+    {% if page.tags.size > 0 %}
+    <div class="post-tags reveal" style="margin-top: 30px;">
+      {% for tag in page.tags %}<span class="tag">{{ tag }}</span>{% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="share-buttons reveal">
+      <span>شارك التطبيق:</span>
+      {% assign share_url = page.url | prepend: site.baseurl | prepend: site.url %}
+      <button class="share-btn" data-type="whatsapp" data-url="{{ share_url }}" data-title="{{ page.title }}" aria-label="واتساب"><i class="fa-brands fa-whatsapp"></i></button>
+      <button class="share-btn" data-type="telegram" data-url="{{ share_url }}" data-title="{{ page.title }}" aria-label="تليغرام"><i class="fa-brands fa-telegram"></i></button>
+      <button class="share-btn" data-type="twitter" data-url="{{ share_url }}" data-title="{{ page.title }}" aria-label="إكس"><i class="fa-brands fa-x-twitter"></i></button>
+      <button class="share-btn" data-type="copy" data-url="{{ share_url }}" aria-label="نسخ الرابط"><i class="fa-solid fa-link"></i></button>
+    </div>
+  </div>
+</div>
