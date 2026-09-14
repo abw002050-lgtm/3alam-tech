@@ -3,7 +3,38 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>عالم تقني</title>
+  <title>عالم تقني — خدمات تقنية وبرمجية متعددة</title>
+  <meta name="description" content="عالم تقني — منصة تقدّم خدمات تقنية وبرمجية متعددة: تطوير المواقع والتطبيقات، تصميم الواجهات، والاستشارات التقنية بحلول عصرية.">
+  <meta name="keywords" content="عالم تقني, تطوير مواقع, تطبيقات جوال, برمجة, تصميم واجهات, استشارات تقنية, خدمات تقنية">
+  <meta name="author" content="عالم تقني">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#6366f1">
+  <link rel="canonical" href="https://abw002050-lgtm.github.io/3alam-tech/">
+  <!-- favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='88'>💻</text></svg>">
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="عالم تقني — خدمات تقنية وبرمجية متعددة">
+  <meta property="og:description" content="منصة تقدّم خدمات تقنية وبرمجية متعددة: تطوير المواقع والتطبيقات والتصميم والاستشارات التقنية.">
+  <meta property="og:url" content="https://abw002050-lgtm.github.io/3alam-tech/">
+  <meta property="og:locale" content="ar_AR">
+  <meta property="og:site_name" content="عالم تقني">
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="عالم تقني — خدمات تقنية وبرمجية متعددة">
+  <meta name="twitter:description" content="منصة تقدّم خدمات تقنية وبرمجية متعددة.">
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "عالم تقني",
+    "alternateName": "Tech World",
+    "url": "https://abw002050-lgtm.github.io/3alam-tech/",
+    "description": "منصة تقدّم خدمات تقنية وبرمجية متعددة",
+    "inLanguage": "ar"
+  }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -876,9 +907,48 @@
       display: block;
       opacity: 1;
     }
+
+    /* ===== مؤشر الكتابة يومض (CSS) ===== */
+    .cursor {
+      animation: blink 1s step-end infinite;
+    }
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+
+    /* ===== رابط تخطّي المحتوى ===== */
+    .skip-link {
+      position: absolute;
+      top: -100px;
+      right: 16px;
+      background: var(--primary);
+      color: #fff;
+      padding: 10px 18px;
+      border-radius: 10px;
+      z-index: 2000;
+      transition: top 0.2s ease;
+    }
+    .skip-link:focus {
+      top: 16px;
+    }
+
+    /* ===== احترام تقليل الحركة ===== */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+      .reveal {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+    }
   </style>
 </head>
 <body>
+  <a href="#home" class="skip-link">تخطّي إلى المحتوى الرئيسي</a>
 
   <!-- ===== شريط التنقل ===== -->
   <nav class="navbar" id="navbar">
@@ -910,7 +980,7 @@
       <div class="hero-avatar">ع</div>
       <p class="hero-greeting">مرحبًا، أنا</p>
       <h1><span class="name">عالم تقني</span></h1>
-      <p class="hero-role">أقدم لك خدمات <span class="typed-text" id="typed"></span><span class="cursor">|</span></p>
+      <p class="hero-role">أقدم لك خدمات <span class="typed-text" id="typed"></span><span class="cursor" aria-hidden="true">|</span></p>
       <p class="hero-bio">
         أقدّم لك خدمات تقنية وبرمجية متعددة — من تطوير المواقع والتطبيقات إلى
         التصميم والاستشارات التقنية، بحلول عصرية تناسب احتياجاتك.
@@ -1164,10 +1234,10 @@
       <a href="#" aria-label="تويتر"><i class="fa-brands fa-x-twitter"></i></a>
       <a href="#" aria-label="إنستغرام"><i class="fa-brands fa-instagram"></i></a>
       <a href="#" aria-label="لينكدإن"><i class="fa-brands fa-linkedin-in"></i></a>
-      <a href="#" aria-label="غيت هاب"><i class="fa-brands fa-github"></i></a>
+      <a href="https://github.com/abw002050-lgtm/3alam-tech" aria-label="غيت هاب"><i class="fa-brands fa-github"></i></a>
     </div>
     <p class="footer-text">
-      © 2025 جميع الحقوق محفوظة — صُنع بـ <span class="heart">♥</span>
+      © 2025 عالم تقني — جميع الحقوق محفوظة — صُنع بـ <span class="heart">♥</span>
     </p>
   </footer>
 
@@ -1205,14 +1275,7 @@
     }
     typeRole();
 
-    // ===== مؤشر الكتابة يومض =====
-    const cursor = document.querySelector('.cursor');
-    if (cursor) {
-      cursor.style.animation = 'none';
-      setInterval(() => {
-        cursor.style.opacity = cursor.style.opacity === '0' ? '1' : '0';
-      }, 500);
-    }
+    // ===== مؤشر الكتابة: يُدار عبر CSS الآن (لا حاجة لـ JS) =====
 
     // ===== قائمة الجوال =====
     const menuToggle = document.getElementById('menuToggle');
@@ -1254,27 +1317,31 @@
       icon.className = theme === 'dark' ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
     }
 
-    // ===== تظليل الرابط النشط عند التمرير =====
+    // ===== تظليل الرابط النشط عند التمرير (مُخفّف بـ rAF) =====
     const sections = document.querySelectorAll('section');
     const navAnchors = document.querySelectorAll('.nav-links a');
+    let ticking = false;
 
-    window.addEventListener('scroll', () => {
-      let current = '';
-      sections.forEach(sec => {
-        const top = sec.offsetTop - 100;
-        if (window.scrollY >= top) current = sec.getAttribute('id');
+    function onScroll() {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        let current = '';
+        sections.forEach(sec => {
+          const top = sec.offsetTop - 100;
+          if (window.scrollY >= top) current = sec.getAttribute('id');
+        });
+        navAnchors.forEach(a => {
+          a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+        });
+        document.getElementById('navbar').style.boxShadow =
+          window.scrollY > 20 ? '0 4px 30px rgba(0,0,0,0.15)' : 'none';
+        document.getElementById('backToTop').classList.toggle('show', window.scrollY > 400);
+        ticking = false;
       });
-      navAnchors.forEach(a => {
-        a.classList.toggle('active', a.getAttribute('href') === '#' + current);
-      });
+    }
 
-      // تظليل شريط التنقل عند التمرير
-      document.getElementById('navbar').style.boxShadow =
-        window.scrollY > 20 ? '0 4px 30px rgba(0,0,0,0.15)' : 'none';
-
-      // زر العودة للأعلى
-      document.getElementById('backToTop').classList.toggle('show', window.scrollY > 400);
-    });
+    window.addEventListener('scroll', onScroll, { passive: true });
 
     // ===== زر العودة للأعلى =====
     document.getElementById('backToTop').addEventListener('click', () => {
