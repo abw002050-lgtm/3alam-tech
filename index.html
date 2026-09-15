@@ -25,7 +25,6 @@ description: "عالم تقني — منصة تقدّم خدمات تقنية و
     <div class="hero-socials">
       <a href="{{ site.baseurl }}/#contact" aria-label="تواصل"><i class="fa-solid fa-envelope"></i></a>
       <a href="https://wa.me/{{ site.whatsapp }}" target="_blank" rel="noopener" aria-label="واتساب"><i class="fa-brands fa-whatsapp"></i></a>
-      <a href="{{ site.github_repo }}" target="_blank" rel="noopener" aria-label="غيت هاب"><i class="fa-brands fa-github"></i></a>
     </div>
   </div>
   <a href="#latest" class="scroll-down" aria-label="انزل للأسفل">
@@ -235,11 +234,25 @@ description: "عالم تقني — منصة تقدّم خدمات تقنية و
         <h4>الموقع</h4>
         <p>{{ site.location }}</p>
       </div>
-      <div class="contact-item reveal">
-        <i class="fa-brands fa-github"></i>
-        <h4>غيت هاب</h4>
-        <a href="{{ site.github_repo }}" target="_blank" rel="noopener" style="direction: ltr; unicode-bidi: embed;">عرض المستودع</a>
-      </div>
+    </div>
+
+    <!-- نموذج التواصل (Netlify Forms) -->
+    <div class="contact-form-wrap reveal">
+      <h3><i class="fa-solid fa-paper-plane"></i> أرسل رسالة</h3>
+      <form class="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/?sent=true">
+        <input type="hidden" name="form-name" value="contact" />
+        <p class="hp-field" aria-hidden="true">
+          <label>لا تملأ هذا الحقل<input name="bot-field" /></label>
+        </p>
+        <div class="form-row">
+          <input type="text" name="name" placeholder="الاسم" required autocomplete="name" />
+          <input type="email" name="email" placeholder="البريد الإلكتروني" required autocomplete="email" />
+        </div>
+        <textarea name="message" rows="5" placeholder="رسالتك..." required></textarea>
+        <button type="submit" class="btn btn-primary">
+          <i class="fa-solid fa-paper-plane"></i> إرسال الرسالة
+        </button>
+      </form>
     </div>
   </div>
 </section>

@@ -168,3 +168,13 @@ shareBtns.forEach(btn => {
     if (shareUrl) window.open(shareUrl, '_blank', 'noopener');
   });
 });
+
+// ===== رسالة نجاح إرسال النموذج =====
+const params = new URLSearchParams(window.location.search);
+if (params.get('sent') === 'true') {
+  const formWrap = document.querySelector('.contact-form-wrap');
+  if (formWrap) {
+    formWrap.innerHTML = '<div style="text-align:center;padding:20px;"><i class="fa-solid fa-circle-check" style="font-size:3rem;color:#22c55e;margin-bottom:16px;"></i><h3 style="margin-bottom:8px;">تم إرسال رسالتك بنجاح!</h3><p style="color:var(--text-muted);">سأعود إليك في أقرب وقت إن شاء الله.</p></div>';
+    formWrap.scrollIntoView({ behavior: 'smooth' });
+  }
+}
