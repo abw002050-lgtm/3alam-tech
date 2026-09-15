@@ -1,6 +1,7 @@
 source "https://rubygems.org"
 
-gem "github-pages", group: :jekyll_plugins
+# Jekyll standard — يعمل على GitHub Pages و Cloudflare Pages
+gem "jekyll", "~> 4.3"
 
 group :jekyll_plugins do
   gem "jekyll-sitemap"
