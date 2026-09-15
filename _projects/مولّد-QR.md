@@ -32,4 +32,4 @@ tags: [أداة, QR, رمز]
 #qrgen .qr-btn { align-self: center; }
 </style>
 
-<script src="{{ site.baseurl }}/assets/js/tool-qr.js" defer></script>
+<script src="{{ site.baseurl }}/assets/js/tool-qr.js"></script>
