@@ -1,11 +1,13 @@
-// ===== لعبة إكس-أو (Tic-Tac-Toe) =====
+// ===== لعبة إكس-أو (Tic-Tac-Toe) — Event Delegation =====
 (function() {
-  const board = Array(9).fill('');
-  let human = 'X', computer = 'O';
+  const boardEl = document.querySelector('#tictactoe .ttt-board');
+  if (!boardEl) return;
+  
+  let board = Array(9).fill('');
+  const human = 'X', computer = 'O';
   let scores = { human: 0, computer: 0, draw: 0 };
   let gameOver = false;
 
-  const cells = document.querySelectorAll('#tictactoe .cell');
   const statusEl = document.querySelector('#tictactoe .ttt-status');
   const resetBtn = document.querySelector('#tictactoe .ttt-reset');
   const scoreEl = document.querySelector('#tictactoe .ttt-scores');
@@ -19,6 +21,7 @@
   function isFull(b) { return b.every(c => c); }
 
   function render() {
+    const cells = boardEl.querySelectorAll('.cell');
     cells.forEach((c, i) => {
       c.textContent = board[i];
       c.classList.remove('x', 'o');
@@ -29,7 +32,7 @@
   }
 
   function renderScores() {
-    if (scoreEl) scoreEl.textContent = `أنت: ${scores.human}  •  الكمبيوتر: ${scores.computer}  •  تعادل: ${scores.draw}`;
+    if (scoreEl) scoreEl.textContent = 'أنت: ' + scores.human + '  •  الكمبيوتر: ' + scores.computer + '  •  تعادل: ' + scores.draw;
   }
 
   function setStatus(msg, win) {
@@ -39,7 +42,6 @@
     }
   }
 
-  // Minimax للذكاء الاصطناعي
   function minimax(b, depth, isMax) {
     if (checkWin(b, computer)) return 10 - depth;
     if (checkWin(b, human)) return depth - 10;
@@ -74,7 +76,7 @@
     if (move >= 0) board[move] = computer;
   }
 
-  function handleClick(idx) {
+  function playMove(idx) {
     if (board[idx] || gameOver) return;
     board[idx] = human;
     let win = checkWin(board, human);
@@ -97,13 +99,22 @@
   }
 
   function reset() {
-    board.fill('');
+    board = Array(9).fill('');
     gameOver = false;
     setStatus('دورك — أنت X');
     render();
   }
 
-  cells.forEach((c, i) => c.addEventListener('click', () => handleClick(i)));
+  // Event delegation — مستمع واحد على اللوحة
+  boardEl.addEventListener('click', function(e) {
+    const cell = e.target.closest('.cell');
+    if (!cell) return;
+    const idx = parseInt(cell.dataset.idx);
+    if (isNaN(idx)) return;
+    playMove(idx);
+    render();
+  });
+
   resetBtn && resetBtn.addEventListener('click', reset);
   setStatus('دورك — أنت X');
   renderScores();
