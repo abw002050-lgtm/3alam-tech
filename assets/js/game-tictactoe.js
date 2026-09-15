@@ -74,8 +74,7 @@
     if (move >= 0) board[move] = computer;
   }
 
-  function handleClick(e) {
-    const idx = parseInt(e.currentTarget.dataset.idx);
+  function handleClick(idx) {
     if (board[idx] || gameOver) return;
     board[idx] = human;
     let win = checkWin(board, human);
@@ -104,7 +103,7 @@
     render();
   }
 
-  cells.forEach(c => c.addEventListener('click', handleClick));
+  cells.forEach((c, i) => c.addEventListener('click', () => handleClick(i)));
   resetBtn && resetBtn.addEventListener('click', reset);
   setStatus('دورك — أنت X');
   renderScores();
