@@ -1,12 +1,14 @@
 ---
 layout: default
-title: شروحات
-description: "تصفّح أحدث الشروحات والمقالات التقنية على منصة عالم تقني."
+title: "شروحات تقنية بالعربي — أندرويد، شبكات WiFi، برمجة، ذكاء اصطناعي"
+description: "مكتبة شروحات تقنية بالعربية — تعلّم أندرويد، شبكات WiFi اللاسلكية، البرمجة، الذكاء الاصطناعي، والأمان السيبراني. شروحات عملية خطوة بخطوة."
 permalink: /shuroohat/
+keywords: "شروحات تقنية, شرح أندرويد, شرح WiFi, برمجة بالعربي, ذكاء اصطناعي, أمان الحسابات"
 ---
+
 <div class="page-header reveal">
-  <h1>الشروحات</h1>
-  <p>تصفّح أحدث المقالات والشروحات التقنية</p>
+  <h1>شروحات تقنية بالعربي</h1>
+  <p>مكتبة شروحات متكاملة — أندرويد، شبكات، برمجة، ذكاء اصطناعي، وأمان</p>
   <div class="breadcrumb">
     <a href="{{ site.baseurl }}/"><i class="fa-solid fa-house"></i> الرئيسية</a>
     <i class="fa-solid fa-chevron-left"></i>
@@ -14,8 +16,32 @@ permalink: /shuroohat/
   </div>
 </div>
 
+<!-- فهرس تصنيفات للوصول السريع و SEO -->
 <section>
   <div class="container">
+    <div class="section-title reveal">
+      <h2>تصفّح حسب التصنيف</h2>
+      <p>اختر التصنيف الذي يهمّك</p>
+      <div class="line"></div>
+    </div>
+    <div class="category-filters" style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:20px 0;">
+      <a href="#all" class="tag" style="background:var(--gradient);color:white;padding:8px 16px;border-radius:20px;text-decoration:none;">الكل</a>
+      {% assign categories = site.posts | map: "category" | uniq | compact | sort %}
+      {% for cat in categories %}
+      <a href="#cat-{{ cat | slugify }}" class="tag" style="background:var(--card-bg);color:var(--text);padding:8px 16px;border-radius:20px;text-decoration:none;border:1px solid var(--border);">{{ cat }}</a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section id="all">
+  <div class="container">
+    <div class="section-title reveal">
+      <h2>كل الشروحات</h2>
+      <p>{{ site.posts.size }} شرحًا تقنيًا متاحًا</p>
+      <div class="line"></div>
+    </div>
+
     {% if site.posts.size > 0 %}
     <div class="content-grid">
       {% for post in site.posts %}

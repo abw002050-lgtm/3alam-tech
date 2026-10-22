@@ -3,24 +3,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% if page.title %}{{ page.title }} — {{ site.title }}{% else %}{{ site.title }} — خدمات تقنية وبرمجية متعددة{% endif %}</title>
   <meta name="description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
-  <meta name="keywords" content="عالم تقني, تطوير مواقع, تطبيقات جوال, برمجة, شروحات, مقالات تقنية, تصاميم واجهات, استشارات تقنية, {{ page.keywords }}">
+  <meta name="keywords" content="{% if page.tags %}{{ page.tags | join: ', ' }}, {% endif %}{% if page.category %}{{ page.category }}, {% endif %}عالم تقني, شروحات تقنية, تطبيقات, برمجة, أندرويد, شبكات, أدوات تقنية, عاصم محمد, اليمن">
   <meta name="author" content="{{ site.author }}">
-  <meta name="robots" content="index, follow">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="googlebot" content="index, follow">
   <meta name="theme-color" content="#6366f1">
-  <link rel="canonical" href="{{ page.url | prepend: site.baseurl | prepend: site.url }}">
+  <meta name="language" content="Arabic">
+  <meta name="geo.region" content="YE">
+  <meta name="geo.placename" content="Yemen">
+  <link rel="canonical" href="{{ page.url | absolute_url }}">
   <!-- favicon -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='88'>💻</text></svg>">
   <!-- Open Graph -->
   <meta property="og:type" content="{% if page.layout == 'post' %}article{% else %}website{% endif %}">
   <meta property="og:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}">
   <meta property="og:description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
-  <meta property="og:url" content="{{ page.url | prepend: site.baseurl | prepend: site.url }}">
+  <meta property="og:url" content="{{ page.url | absolute_url }}">
   <meta property="og:locale" content="ar_AR">
   <meta property="og:site_name" content="{{ site.title }}">
+  <meta property="og:updated_time" content="{{ page.date | date_to_xmlschema }}">
+  {% if page.image %}<meta property="og:image" content="{{ page.image | absolute_url }}">{% endif %}
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}">
   <meta name="twitter:description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
+  {% if page.image %}<meta name="twitter:image" content="{{ page.image | absolute_url }}">{% endif %}
   <!-- Structured Data -->
   {% if page.layout == 'post' %}
   <script type="application/ld+json">
@@ -30,9 +37,32 @@
     "headline": "{{ page.title }}",
     "description": "{{ page.description }}",
     "author": { "@type": "Person", "name": "{{ site.author }}" },
-    "publisher": { "@type": "Organization", "name": "{{ site.title }}" },
+    "publisher": { 
+      "@type": "Organization", 
+      "name": "{{ site.title }}",
+      "logo": { "@type": "ImageObject", "url": "{{ '/assets/img/logo.png' | absolute_url }}" }
+    },
     "datePublished": "{{ page.date | date_to_xmlschema }}",
-    "inLanguage": "ar"
+    "dateModified": "{{ page.date | date_to_xmlschema }}",
+    "inLanguage": "ar",
+    "mainEntityOfPage": "{{ page.url | absolute_url }}",
+    {% if page.category %}"articleSection": "{{ page.category }}",{% endif %}
+    {% if page.tags %}"keywords": {{ page.tags | jsonify }}{% endif %}
+  }
+  </script>
+  {% elsif page.layout == 'project' %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "{{ page.title }}",
+    "description": "{{ page.description }}",
+    "author": { "@type": "Person", "name": "{{ site.author }}" },
+    "publisher": { "@type": "Organization", "name": "{{ site.title }}" },
+    "inLanguage": "ar",
+    "operatingSystem": "Web Browser",
+    "applicationCategory": "{{ page.category | default: 'Utilities' }}",
+    "url": "{{ page.url | absolute_url }}"
   }
   </script>
   {% else %}
@@ -41,10 +71,15 @@
     "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "{{ site.title }}",
-    "alternateName": "Tech World",
+    "alternateName": ["عالم تقني", "3alam-tech", "Tech World"],
     "url": "{{ site.url }}{{ site.baseurl }}/",
     "description": "{{ site.description }}",
-    "inLanguage": "ar"
+    "inLanguage": "ar",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "{{ site.url }}{{ site.baseurl }}/?s={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
   }
   </script>
   {% endif %}

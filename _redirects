@@ -1,0 +1,12 @@
+# توجيه صفحات GitHub Pages القديمة لـ Netlify
+# يحافظ على ترتيب البحث (SEO) بنقل "link juice" للرابط الجديد
+
+# توجيه صفحة shuroohat القديمة
+/shuroohat/*  /shuroohat/:splat  301
+
+# توجيه صفحة tawabeek القديمة
+/tawabeek/*  /tawabeek/:splat  301
+
+# توجيه الجذر
+/3alam-tech/  /  301
+/3alam-tech/*  /:splat  301

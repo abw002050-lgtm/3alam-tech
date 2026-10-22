@@ -1,4 +1,10 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://abw002050-lgtm.github.io/3alam-tech/sitemap.xml
+# منع فهرسة الملفات غير الضرورية
+Disallow: /*.json$
+Disallow: /Gemfile
+Disallow: /Gemfile.lock
+
+# خريطة الموقع — الرابط الأساسي على Netlify
+Sitemap: https://3alam-tech.netlify.app/sitemap.xml

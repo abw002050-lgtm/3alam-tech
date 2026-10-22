@@ -5,9 +5,12 @@ author: "عاصم محمد"
 lang: ar
 dir: rtl
 
-# رابط الموقع على GitHub Pages
-url: "https://abw002050-lgtm.github.io"
-baseurl: "/3alam-tech"
+# رابط الموقع الأساسي على Netlify (يعمل في اليمن بدون VPN)
+url: "https://3alam-tech.netlify.app"
+baseurl: ""
+
+# رابط GitHub Pages الاحتياطي
+github_pages_url: "https://abw002050-lgtm.github.io/3alam-tech"
 
 # معلومات التواصل
 whatsapp: "00967735383729"
