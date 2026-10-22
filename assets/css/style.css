@@ -254,8 +254,9 @@ footer { background: var(--bg-card); border-top: 1px solid var(--border); paddin
 .back-to-top:hover { transform: translateY(-4px); }
 
 /* ===== أنيميشن الظهور ===== */
-.reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
-.reveal.visible { opacity: 1; transform: translateY(0); }
+/* يُخفى المحتوى فقط عند تفعيل JavaScript (html.js) — وإلا يبقى ظاهرًا دائمًا */
+html.js .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
+html.js .reveal.visible { opacity: 1; transform: translateY(0); }
 
 /* ===== قائمة الجوال المظللة ===== */
 .nav-overlay {

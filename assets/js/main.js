@@ -110,20 +110,37 @@ backToTopBtn && backToTopBtn.addEventListener('click', () => {
 });
 
 // ===== أنيميشن الظهور عند التمرير =====
-const revealObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-      if (entry.target.classList.contains('skill-card')) {
-        const bar = entry.target.querySelector('.skill-bar-fill');
-        if (bar) bar.style.width = bar.dataset.level;
-      }
-      revealObserver.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.15 });
+// threshold: 0 ضروري — المحتوىات الطويلة (مقال كامل) لا يمكن أن تُ露出 15% منها على شاشة الجوال
+const revealEls = document.querySelectorAll('.reveal');
 
-document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+if ('IntersectionObserver' in window) {
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        if (entry.target.classList.contains('skill-card')) {
+          const bar = entry.target.querySelector('.skill-bar-fill');
+          if (bar) bar.style.width = bar.dataset.level;
+        }
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0, rootMargin: '0px 0px -40px 0px' });
+
+  revealEls.forEach(el => revealObserver.observe(el));
+
+  // شبكة أمان: أي عنصر عالق داخل الشاشة يُكشف فورًا (تفاديًا لاختفاء نص المحتوى)
+  setTimeout(() => {
+    revealEls.forEach(el => {
+      if (el.classList.contains('visible')) return;
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom > 0) el.classList.add('visible');
+    });
+  }, 2500);
+} else {
+  // متصفح لا يدعم IntersectionObserver: أظهر كل المحتوى فورًا
+  revealEls.forEach(el => el.classList.add('visible'));
+}
 
 // ===== عدّاد الأرقام =====
 const statObserver = new IntersectionObserver((entries) => {

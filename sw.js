@@ -1,7 +1,7 @@
 // عالم تقني — Service Worker
 // يخزّن الملفات الثابتة محلياً لتسريع التحميل وتحسين تجربة المستخدم
 
-const CACHE_NAME = '3alam-tech-v1';
+const CACHE_NAME = '3alam-tech-v2';
 const STATIC_ASSETS = [
   '/',
   '/shuroohat/',
@@ -47,15 +47,18 @@ self.addEventListener('fetch', (event) => {
   // تخطّي الطلبات الخارجية (Google Fonts, CDN)
   if (url.origin !== self.location.origin) return;
 
-  // للأصول الثابتة (CSS, JS): الذاكرة أولاً
+  // للأصول الثابتة (CSS, JS): الذاكرة أولاً مع تحديث فوري في الخلفية (stale-while-revalidate)
   if (request.destination === 'style' || request.destination === 'script') {
     event.respondWith(
       caches.match(request).then((cached) => {
-        return cached || fetch(request).then((response) => {
-          const responseClone = response.clone();
-          caches.open(CACHE_NAME).then((cache) => cache.put(request, responseClone));
+        const network = fetch(request).then((response) => {
+          if (response && response.status === 200) {
+            const responseClone = response.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(request, responseClone));
+          }
           return response;
         }).catch(() => cached);
+        return cached || network;
       })
     );
     return;

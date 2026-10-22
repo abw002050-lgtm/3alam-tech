@@ -1,5 +1,8 @@
 <head>
   <meta charset="UTF-8">
+  <!-- تفعيل JavaScript: يجعل عناصر الظهور تبدأ مخفية ثم تُكشف بالتمرير (مع بقائها ظاهرة إن تعطّل JS) -->
+  <script>document.documentElement.classList.add('js');</script>
+  <noscript><style>.reveal{opacity:1!important;transform:none!important}</style></noscript>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% if page.title %}{{ page.title }} — {{ site.title }}{% else %}{{ site.title }} — خدمات تقنية وبرمجية متعددة{% endif %}</title>
   <meta name="description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
