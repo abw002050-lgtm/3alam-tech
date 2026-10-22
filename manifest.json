@@ -1,0 +1,48 @@
+{
+  "name": "عالم تقني — 3alam-tech",
+  "short_name": "عالم تقني",
+  "description": "منصة تقنية تقدم شروحات، تطبيقات، أدوات تفاعلية، ومقالات بالعربية.",
+  "lang": "ar",
+  "dir": "rtl",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0f172a",
+  "theme_color": "#6366f1",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect width='192' height='192' rx='32' fill='%236366f1'/><text x='50%' y='55%' font-size='100' text-anchor='middle' dominant-baseline='middle' fill='white'>💻</text></svg>",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='80' fill='%236366f1'/><text x='50%' y='55%' font-size='260' text-anchor='middle' dominant-baseline='middle' fill='white'>💻</text></svg>",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["education", "technology", "productivity"],
+  "shortcuts": [
+    {
+      "name": "الشروحات",
+      "short_name": "شروحات",
+      "url": "/shuroohat/",
+      "description": "تصفح جميع الشروحات التقنية"
+    },
+    {
+      "name": "التطبيقات والأدوات",
+      "short_name": "أدوات",
+      "url": "/tawabeek/",
+      "description": "تطبيقات وأدوات تفاعلية"
+    },
+    {
+      "name": "عن الموقع",
+      "short_name": "عنّا",
+      "url": "/about/",
+      "description": "تعرف على عالم تقني"
+    }
+  ]
+}
