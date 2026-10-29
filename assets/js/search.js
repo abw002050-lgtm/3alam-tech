@@ -74,11 +74,16 @@
       if (k && s.indexOf(k) !== -1) s = s.split(k).join(normalize(SYNONYMS[key]));
     }
 
+    /* كل كلمة تُرجَع كمجموعة بدائل: الصيغة بعد حذف «ال» + الصيغة الأصلية.
+       هكذا «واتساب» تجد المقال سواء كُتب فيه واتساب أو WhatsApp. */
     return s.split(' ')
       .filter(function (t) { return t.length > 0; })
       .map(function (t) {
-        if (t.indexOf('ال') === 0 && t.length > 4) return t.slice(2);
-        return t;
+        var alts = [];
+        var base = (t.indexOf('ال') === 0 && t.length > 4) ? t.slice(2) : t;
+        if (alts.indexOf(base) === -1) alts.push(base);
+        if (base !== t && alts.indexOf(t) === -1) alts.push(t);
+        return alts;
       });
   }
 
@@ -117,7 +122,12 @@
       var okCat = !activeCat || card._cat === activeCat;
       var okQuery = true;
       for (var j = 0; j < terms.length; j++) {
-        if (card._haystack.indexOf(terms[j]) === -1) { okQuery = false; break; }
+        var alts = terms[j];
+        var hit = false;
+        for (var k = 0; k < alts.length; k++) {
+          if (card._haystack.indexOf(alts[k]) !== -1) { hit = true; break; }
+        }
+        if (!hit) { okQuery = false; break; }
       }
       var visible = okCat && okQuery;
 
