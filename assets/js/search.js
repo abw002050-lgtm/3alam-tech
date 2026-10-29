@@ -49,12 +49,32 @@
   var activeCat = '';
   var debounceTimer = null;
 
+  /* مرادفات: القارئ يكتب «الواي فاي» أو «بايثون»، والمقال مكتوب فيه WiFi أو Python.
+     تُستبدل على الجملة كاملة قبل تقسيمها إلى كلمات. */
+  var SYNONYMS = {
+    'واي فاي': 'wifi', 'وايفاي': 'wifi', 'واى فاى': 'wifi', 'شبكه': 'شبكة',
+    'بايثون': 'python', 'بايتون': 'python', 'بيثون': 'python',
+    'جافا سكريبت': 'javascript', 'جافاسكريبت': 'javascript', 'جي اس': 'javascript',
+    'واتساب': 'whatsapp', 'واتس اب': 'whatsapp',
+    'جوجل': 'google', 'بلوتوث': 'bluetooth', 'انستغرام': 'instagram',
+    'android': 'اندرويد',
+    'فرمته': 'فرمتة', 'فرمطة': 'فرمتة', 'ضبط المصنع': 'فرمتة',
+    'تحديثات': 'تحديث'
+  };
+
   /* تجهيز كلمات البحث: نحذف أداة التعريف «ال» من بداية كل كلمة،
      لأن القارئ يكتب «الاندرويد» بينما العنوان مكتوب فيه «أندرويد».
      بدون هذه الخطوة يبحث حرفيًا عن «الاندرويد» فتضيع معظم النتائج. */
   function buildTerms(q) {
-    return normalize(q)
-      .split(' ')
+    var s = normalize(q);
+
+    for (var key in SYNONYMS) {
+      if (!Object.prototype.hasOwnProperty.call(SYNONYMS, key)) continue;
+      var k = normalize(key);
+      if (k && s.indexOf(k) !== -1) s = s.split(k).join(normalize(SYNONYMS[key]));
+    }
+
+    return s.split(' ')
       .filter(function (t) { return t.length > 0; })
       .map(function (t) {
         if (t.indexOf('ال') === 0 && t.length > 4) return t.slice(2);
