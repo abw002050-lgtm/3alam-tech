@@ -1,7 +1,7 @@
 // عالم تقني — Service Worker
 // يخزّن الملفات الثابتة محلياً لتسريع التحميل وتحسين تجربة المستخدم
 
-const CACHE_NAME = '3alam-tech-v4';
+const CACHE_NAME = '3alam-tech-v5';
 const STATIC_ASSETS = [
   '/',
   '/shuroohat/',

@@ -206,6 +206,16 @@
     }
   });
 
+  /* إن كانت النتائج خارج الشاشة (الجوال) ننقل القارئ إليها بلطف */
+  function revealResults() {
+    if (!grid) return;
+    var r = grid.getBoundingClientRect();
+    if (r.top > window.innerHeight - 140) {
+      try { grid.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+      catch (e) { grid.scrollIntoView(); }
+    }
+  }
+
   // أزرار التصنيفات
   chips.forEach(function (chip) {
     chip.addEventListener('click', function () {
@@ -214,7 +224,13 @@
       setActiveChip(activeCat ? chip : chips[0]);
       apply();
       syncURL();
+      revealResults();
     });
+  });
+
+  // زر «بحث» على لوحة مفاتيح الجوال = الانتقال إلى النتائج
+  input.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') { e.preventDefault(); revealResults(); }
   });
 
   // زر «عرض كل الشروحات» داخل رسالة عدم وجود نتائج
@@ -225,6 +241,21 @@
       setActiveChip(chips[0]);
       apply();
       syncURL();
+    });
+  }
+
+  /* النص الإرشادي الطويل يُقطع على الشاشات الصغيرة فنقصّره هناك */
+  function fitPlaceholder() {
+    var narrow = window.matchMedia && window.matchMedia('(max-width: 600px)').matches;
+    input.placeholder = narrow
+      ? 'ابحث… مثال: أندرويد، WiFi'
+      : 'ابحث في الشروحات… مثال: أندرويد، WiFi، فرمتة، بايثون';
+  }
+  fitPlaceholder();
+  if (window.addEventListener) {
+    var rz;
+    window.addEventListener('resize', function () {
+      clearTimeout(rz); rz = setTimeout(fitPlaceholder, 200);
     });
   }
 

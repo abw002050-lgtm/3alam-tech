@@ -405,6 +405,10 @@ html.js .reveal.visible { opacity: 1; transform: translateY(0); }
   .hero-bio { font-size: 0.95rem; }
   .hero-avatar { width: 100px; height: 100px; font-size: 2.4rem; }
   .section-title h2 { font-size: 1.6rem; }
+  /* تقليص الفراغ بين الترويسة وصندوق البحث على الجوال */
+  .page-header { padding: 96px 16px 24px; }
+  .search-section { padding: 0 16px; }
+  section#all { padding-top: 36px; }
   .about-grid { grid-template-columns: 1fr; gap: 24px; }
   .about-image { max-width: 200px; margin: 0 auto; font-size: 3rem; }
   .about-stats { grid-template-columns: 1fr; }
@@ -504,6 +508,25 @@ html.js .reveal.visible { opacity: 1; transform: translateY(0); }
 .chip.is-active .chip-count { background: rgba(255, 255, 255, 0.22); }
 .search-status { text-align: center; min-height: 22px; margin: 16px 0 0; font-size: 0.9rem; color: var(--text-muted); }
 [hidden] { display: none !important; }
+/* هامش للتمرير إلى النتائج حتى لا يخفي شريط التنقل أول بطاقة */
+#postsGrid { scroll-margin-top: 96px; }
+
+/* أيقونة المجلد داخل الزر تُصغر قليلًا حتى لا تبدو ككتلة سوداء */
+.chip i { font-size: 0.78em; opacity: 0.8; }
+
+/* الجوال: التصنيفات في صف واحد قابل للتمرير أفقيًا بدل ٥ صفوف
+   (يوفّر نحو ١٥٠px من الارتفاع فتظهر أولى الشروحات دون تمرير طويل) */
+@media (max-width: 768px) {
+  .category-chips {
+    flex-wrap: nowrap; overflow-x: auto; overflow-y: hidden;
+    justify-content: flex-start; max-width: none;
+    margin: 14px -16px 0; padding: 2px 16px 8px;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none; -ms-overflow-style: none;
+    scroll-padding-inline: 16px;
+  }
+  .category-chips::-webkit-scrollbar { display: none; }
+  .chip { flex: 0 0 auto; }
+}
 
 @media (max-width: 600px) {
   .search-box-input { height: 52px; font-size: 16px; padding: 0 48px; }
