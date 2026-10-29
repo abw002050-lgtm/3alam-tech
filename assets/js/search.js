@@ -49,6 +49,19 @@
   var activeCat = '';
   var debounceTimer = null;
 
+  /* تجهيز كلمات البحث: نحذف أداة التعريف «ال» من بداية كل كلمة،
+     لأن القارئ يكتب «الاندرويد» بينما العنوان مكتوب فيه «أندرويد».
+     بدون هذه الخطوة يبحث حرفيًا عن «الاندرويد» فتضيع معظم النتائج. */
+  function buildTerms(q) {
+    return normalize(q)
+      .split(' ')
+      .filter(function (t) { return t.length > 0; })
+      .map(function (t) {
+        if (t.indexOf('ال') === 0 && t.length > 4) return t.slice(2);
+        return t;
+      });
+  }
+
   function readParam(name) {
     var m = new RegExp('[?&]' + name + '=([^&#]*)').exec(window.location.search);
     return m ? decodeURIComponent(m[1].replace(/\+/g, ' ')) : '';
@@ -76,7 +89,7 @@
   }
 
   function apply() {
-    var terms = normalize(input.value).split(' ').filter(function (t) { return t.length > 0; });
+    var terms = buildTerms(input.value);
     var shown = 0;
 
     for (var i = 0; i < cards.length; i++) {

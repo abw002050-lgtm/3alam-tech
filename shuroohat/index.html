@@ -34,11 +34,11 @@ keywords: "شروحات تقنية, شرح أندرويد, شرح WiFi, برمج
         الكل <span class="chip-count">{{ site.posts.size }}</span>
       </button>
       {% assign cats = site.posts | group_by: "category" | sort: "size" | reverse %}
-      {% for c in cats %}{% if c.name and c.name != blank %}
+      {% for c in cats %}{% unless c.name == blank %}
       <button type="button" class="chip" data-cat="{{ c.name }}" aria-pressed="false">
         <i class="fa-solid fa-folder" aria-hidden="true"></i> {{ c.name }} <span class="chip-count">{{ c.size }}</span>
       </button>
-      {% endif %}{% endfor %}
+      {% endunless %}{% endfor %}
     </div>
 
     <p class="search-status" id="searchStatus" role="status" aria-live="polite"></p>
