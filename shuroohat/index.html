@@ -16,21 +16,32 @@ keywords: "شروحات تقنية, شرح أندرويد, شرح WiFi, برمج
   </div>
 </div>
 
-<!-- فهرس تصنيفات للوصول السريع و SEO -->
-<section>
+<!-- ===== بحث سريع وفلترة حسب التصنيف ===== -->
+<section class="search-section" id="search">
   <div class="container">
-    <div class="section-title reveal">
-      <h2>تصفّح حسب التصنيف</h2>
-      <p>اختر التصنيف الذي يهمّك</p>
-      <div class="line"></div>
+    <div class="search-box">
+      <i class="fa-solid fa-magnifying-glass search-box-icon" aria-hidden="true"></i>
+      <input type="search" id="postSearch" class="search-box-input"
+             placeholder="ابحث في الشروحات… مثال: أندرويد، WiFi، فرمتة، بايثون"
+             aria-label="ابحث في الشروحات" autocomplete="off" enterkeyhint="search">
+      <button type="button" id="searchClear" class="search-box-clear" aria-label="مسح البحث" hidden>
+        <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+      </button>
     </div>
-    <div class="category-filters" style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:20px 0;">
-      <a href="#all" class="tag" style="background:var(--gradient);color:white;padding:8px 16px;border-radius:20px;text-decoration:none;">الكل</a>
-      {% assign categories = site.posts | map: "category" | uniq | compact | sort %}
-      {% for cat in categories %}
-      <a href="#cat-{{ cat | slugify }}" class="tag" style="background:var(--card-bg);color:var(--text);padding:8px 16px;border-radius:20px;text-decoration:none;border:1px solid var(--border);">{{ cat }}</a>
-      {% endfor %}
+
+    <div class="category-chips" id="categoryChips" role="group" aria-label="تصفية الشروحات حسب التصنيف">
+      <button type="button" class="chip is-active" data-cat="" aria-pressed="true">
+        الكل <span class="chip-count">{{ site.posts.size }}</span>
+      </button>
+      {% assign cats = site.posts | group_by: "category" | sort: "size" | reverse %}
+      {% for c in cats %}{% if c.name and c.name != blank %}
+      <button type="button" class="chip" data-cat="{{ c.name }}" aria-pressed="false">
+        <i class="fa-solid fa-folder" aria-hidden="true"></i> {{ c.name }} <span class="chip-count">{{ c.size }}</span>
+      </button>
+      {% endif %}{% endfor %}
     </div>
+
+    <p class="search-status" id="searchStatus" role="status" aria-live="polite"></p>
   </div>
 </section>
 
@@ -43,9 +54,13 @@ keywords: "شروحات تقنية, شرح أندرويد, شرح WiFi, برمج
     </div>
 
     {% if site.posts.size > 0 %}
-    <div class="content-grid">
+    <div class="content-grid" id="postsGrid">
       {% for post in site.posts %}
-      <a href="{{ post.url | prepend: site.baseurl }}" class="content-card reveal">
+      <a href="{{ post.url | prepend: site.baseurl }}" class="content-card reveal"
+         data-title="{{ post.title | escape }}"
+         data-category="{{ post.category | default: '' | escape }}"
+         data-tags="{{ post.tags | join: ' ' | escape }}"
+         data-excerpt="{{ post.excerpt | strip_html | normalize_whitespace | truncatewords: 40 | escape }}">
         <div class="content-card-thumb" style="background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);">
           <i class="fa-solid fa-newspaper"></i>
         </div>
@@ -59,6 +74,16 @@ keywords: "شروحات تقنية, شرح أندرويد, شرح WiFi, برمج
         </div>
       </a>
       {% endfor %}
+    </div>
+
+    <!-- حالة عدم وجود نتائج -->
+    <div class="empty-state" id="noResults" hidden>
+      <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+      <h3>لا توجد نتائج مطابقة</h3>
+      <p id="noResultsText"></p>
+      <button type="button" class="btn btn-outline" id="resetFilters" style="margin-top: 18px;">
+        <i class="fa-solid fa-rotate-right"></i> عرض كل الشروحات
+      </button>
     </div>
 
     {% if paginator.total_pages > 1 %}
