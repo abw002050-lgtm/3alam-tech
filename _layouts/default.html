@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 {% include head.html %}
+{% if page.custom_css %}<link rel="stylesheet" href="{{ page.custom_css | relative_url }}">{% endif %}
 <body>
   {% include header.html %}
   <main id="main">
