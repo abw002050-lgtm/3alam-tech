@@ -8,6 +8,35 @@
   text-align: center;
 }
 
+/* زر العودة للصفحة الرئيسية */
+.taiz-back {
+  text-align: right;
+  margin: 0 0 26px;
+}
+
+.taiz-back a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  padding: 9px 16px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg-card);
+  transition: color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.taiz-back a:hover {
+  color: #3b9dff;
+  border-color: #3b9dff;
+  transform: translateY(-2px);
+}
+
+.taiz-back a i { font-size: 0.85rem; }
+
+.taiz-back-bottom { text-align: center; margin: 44px 0 0; }
+
 .taiz-badge {
   background: rgba(0, 112, 243, 0.12);
   color: #3b9dff;
