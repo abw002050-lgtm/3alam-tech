@@ -245,11 +245,16 @@
     }
     apply();
 
-    // القدوم من زر البحث في شريط التنقل (/shuroohat/#search) → تركيز تلقائي
-    if (window.location.hash === '#search') {
-      try { input.focus({ preventScroll: true }); } catch (e) { input.focus(); }
-      try { input.scrollIntoView({ block: 'center', behavior: 'smooth' }); }
-      catch (e) { input.scrollIntoView(); }
-    }
   })();
+
+  /* القدوم من زر البحث في شريط التنقل (/shuroohat/#search) → تركيز تلقائي.
+     نؤجّل التنفيذ قليلًا لأن المتصفح يعيد ضبط التركيز إلى <body>
+     بعد إتمام الانتقال إلى الجزء (#search) مباشرة. */
+  function focusIfRequested() {
+    if (window.location.hash !== '#search') return;
+    try { input.focus({ preventScroll: true }); } catch (e) { input.focus(); }
+    try { input.scrollIntoView({ block: 'center' }); } catch (e) { input.scrollIntoView(); }
+  }
+  setTimeout(focusIfRequested, 350);
+  window.addEventListener('hashchange', function () { setTimeout(focusIfRequested, 80); });
 })();
