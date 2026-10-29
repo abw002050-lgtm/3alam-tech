@@ -62,29 +62,37 @@
     'تحديثات': 'تحديث'
   };
 
-  /* تجهيز كلمات البحث: نحذف أداة التعريف «ال» من بداية كل كلمة،
-     لأن القارئ يكتب «الاندرويد» بينما العنوان مكتوب فيه «أندرويد».
-     بدون هذه الخطوة يبحث حرفيًا عن «الاندرويد» فتضيع معظم النتائج. */
-  function buildTerms(q) {
-    var s = normalize(q);
-
-    for (var key in SYNONYMS) {
-      if (!Object.prototype.hasOwnProperty.call(SYNONYMS, key)) continue;
-      var k = normalize(key);
-      if (k && s.indexOf(k) !== -1) s = s.split(k).join(normalize(SYNONYMS[key]));
-    }
-
-    /* كل كلمة تُرجَع كمجموعة بدائل: الصيغة بعد حذف «ال» + الصيغة الأصلية.
-       هكذا «واتساب» تجد المقال سواء كُتب فيه واتساب أو WhatsApp. */
+  /* كل كلمة تُترجَم إلى مجموعة بدائل: الصيغة بعد حذف «ال» + الصيغة الأصلية.
+     نحوّل «الاندرويد» إلى «اندرويد» لأن العنوان مكتوب فيه «أندرويد»،
+     لكننا نُبقي الصيغة الأصلية بديلًا حتى لا نفقد مطابقة مشروعة. */
+  function termsOf(s) {
     return s.split(' ')
       .filter(function (t) { return t.length > 0; })
       .map(function (t) {
         var alts = [];
-        var base = (t.indexOf('ال') === 0 && t.length > 4) ? t.slice(2) : t;
-        if (alts.indexOf(base) === -1) alts.push(base);
-        if (base !== t && alts.indexOf(t) === -1) alts.push(t);
+        function add(x) { if (x && alts.indexOf(x) === -1) alts.push(x); }
+        add((t.indexOf('ال') === 0 && t.length > 4) ? t.slice(2) : t);
+        add(t);
         return alts;
       });
+  }
+
+  /* نُنتج مجموعتَي شروط: كما كتبها القارئ، ومع المرادفات مُستبدلة.
+     المقال يطابق إن حقّق إحداهما — فـ«واتساب» تجد ما كُتب فيه واتساب،
+     و«الواي فاي» تجد ما كُتب فيه WiFi. */
+  function buildTermSets(q) {
+    var s0 = normalize(q);
+    var sets = [termsOf(s0)];
+
+    var s1 = s0;
+    for (var key in SYNONYMS) {
+      if (!Object.prototype.hasOwnProperty.call(SYNONYMS, key)) continue;
+      var k = normalize(key);
+      if (k && s1.indexOf(k) !== -1) s1 = s1.split(k).join(normalize(SYNONYMS[key]));
+    }
+    if (s1 !== s0) sets.push(termsOf(s1));
+
+    return sets;
   }
 
   function readParam(name) {
@@ -114,21 +122,23 @@
   }
 
   function apply() {
-    var terms = buildTerms(input.value);
+    var termSets = buildTermSets(input.value);
     var shown = 0;
 
     for (var i = 0; i < cards.length; i++) {
       var card = cards[i];
       var okCat = !activeCat || card._cat === activeCat;
-      var okQuery = true;
-      for (var j = 0; j < terms.length; j++) {
-        var alts = terms[j];
-        var hit = false;
-        for (var k = 0; k < alts.length; k++) {
-          if (card._haystack.indexOf(alts[k]) !== -1) { hit = true; break; }
+      var okQuery = termSets.some(function (terms) {
+        for (var j = 0; j < terms.length; j++) {
+          var alts = terms[j];
+          var hit = false;
+          for (var k = 0; k < alts.length; k++) {
+            if (card._haystack.indexOf(alts[k]) !== -1) { hit = true; break; }
+          }
+          if (!hit) return false;
         }
-        if (!hit) { okQuery = false; break; }
-      }
+        return true;
+      });
       var visible = okCat && okQuery;
 
       card.style.display = visible ? '' : 'none';
@@ -144,12 +154,12 @@
     var total = cards.length;
     var q = input.value.trim();
 
-    if (!terms.length && !activeCat) {
+    if (!q && !activeCat) {
       if (statusEl) statusEl.textContent = '';
     } else if (shown) {
       var scope = activeCat ? ' في تصنيف «' + activeCat + '»' : '';
       if (statusEl) {
-        statusEl.textContent = terms.length
+        statusEl.textContent = q
           ? 'ظهر ' + shown + ' من ' + total + ' شرحًا' + scope + ' عن: "' + q + '"'
           : shown + ' شرحًا' + scope;
       }
