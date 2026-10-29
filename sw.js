@@ -1,13 +1,15 @@
 // عالم تقني — Service Worker
 // يخزّن الملفات الثابتة محلياً لتسريع التحميل وتحسين تجربة المستخدم
 
-const CACHE_NAME = '3alam-tech-v2';
+const CACHE_NAME = '3alam-tech-v3';
 const STATIC_ASSETS = [
   '/',
   '/shuroohat/',
   '/tawabeek/',
   '/about/',
+  '/taizphone.html',
   '/assets/css/style.css',
+  '/assets/css/taizphone.css',
   '/manifest.json',
   '/feed.xml',
   '/sitemap.xml'

@@ -406,3 +406,42 @@ html.js .reveal.visible { opacity: 1; transform: translateY(0); }
   .hero-socials a { margin: 0 auto; }
   .btn { width: 100%; justify-content: center; }
 }
+
+/* ===== إعلان تطبيق تعز فون (الصفحة الرئيسية) ===== */
+.taiz-promo {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 26px 24px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  box-shadow: var(--shadow);
+  transition: opacity 0.8s ease, transform 0.8s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.taiz-promo:hover { transform: translateY(-4px); border-color: #3b9dff; }
+.taiz-promo-icon {
+  flex-shrink: 0;
+  width: 56px; height: 56px;
+  border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(0, 112, 243, 0.12);
+  color: #3b9dff;
+  font-size: 1.5rem;
+}
+.taiz-promo-text { flex: 1; }
+.taiz-promo-text h3 {
+  font-family: 'Cairo', sans-serif;
+  font-size: 1.2rem;
+  margin: 0 0 6px;
+  color: var(--text);
+}
+.taiz-promo-text p { color: var(--text-muted); font-size: 0.95rem; margin: 0; }
+.taiz-promo .btn { flex-shrink: 0; white-space: nowrap; }
+
+@media (max-width: 700px) {
+  .taiz-promo { flex-direction: column; text-align: center; }
+  .taiz-promo .btn { width: 100%; }
+}
