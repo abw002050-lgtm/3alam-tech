@@ -1,11 +1,14 @@
+---
+layout: null
+---
 {
   "name": "عالم تقني — 3alam-tech",
   "short_name": "عالم تقني",
   "description": "منصة تقنية تقدم شروحات، تطبيقات، أدوات تفاعلية، ومقالات بالعربية.",
   "lang": "ar",
   "dir": "rtl",
-  "start_url": "/",
-  "scope": "/",
+  "start_url": "{{ "/" | relative_url }}",
+  "scope": "{{ "/" | relative_url }}",
   "display": "standalone",
   "orientation": "portrait-primary",
   "background_color": "#0f172a",
@@ -29,19 +32,19 @@
     {
       "name": "الشروحات",
       "short_name": "شروحات",
-      "url": "/shuroohat/",
+      "url": "{{ "/shuroohat/" | relative_url }}",
       "description": "تصفح جميع الشروحات التقنية"
     },
     {
       "name": "التطبيقات والأدوات",
       "short_name": "أدوات",
-      "url": "/tawabeek/",
+      "url": "{{ "/tawabeek/" | relative_url }}",
       "description": "تطبيقات وأدوات تفاعلية"
     },
     {
       "name": "عن الموقع",
       "short_name": "عنّا",
-      "url": "/about/",
+      "url": "{{ "/about/" | relative_url }}",
       "description": "تعرف على عالم تقني"
     }
   ]

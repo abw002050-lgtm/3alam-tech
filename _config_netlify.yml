@@ -1,0 +1,7 @@
+# ===== إعدادات خاصة بـ Netlify فقط =====
+# يُدمج فوق _config.yml عبر:
+#   bundle exec jekyll build --config _config.yml,_config_netlify.yml
+# ليُبنى الموقع على جذر النطاق (بدون /3alam-tech) وبروابط Netlify الصحيحة.
+
+url: "https://3alam-tech.netlify.app"
+baseurl: ""

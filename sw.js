@@ -1,20 +1,24 @@
+---
+layout: null
+---
 // عالم تقني — Service Worker
 // يخزّن الملفات الثابتة محلياً لتسريع التحميل وتحسين تجربة المستخدم
+// ملاحظة: المسارات تُولّد عبر Jekyll لدعم الاستضافة على Netlify (الجذر) وGitHub Pages (/3alam-tech)
 
-const CACHE_NAME = '3alam-tech-v5';
+const CACHE_NAME = '3alam-tech-v6';
 const STATIC_ASSETS = [
-  '/',
-  '/shuroohat/',
-  '/tawabeek/',
-  '/about/',
-  '/taizphone.html',
-  '/assets/css/style.css',
-  '/assets/css/taizphone.css',
-  '/assets/js/main.js',
-  '/assets/js/search.js',
-  '/manifest.json',
-  '/feed.xml',
-  '/sitemap.xml'
+  '{{ "/" | relative_url }}',
+  '{{ "/shuroohat/" | relative_url }}',
+  '{{ "/tawabeek/" | relative_url }}',
+  '{{ "/about/" | relative_url }}',
+  '{{ "/taizphone.html" | relative_url }}',
+  '{{ "/assets/css/style.css" | relative_url }}',
+  '{{ "/assets/css/taizphone.css" | relative_url }}',
+  '{{ "/assets/js/main.js" | relative_url }}',
+  '{{ "/assets/js/search.js" | relative_url }}',
+  '{{ "/manifest.json" | relative_url }}',
+  '{{ "/feed.xml" | relative_url }}',
+  '{{ "/sitemap.xml" | relative_url }}'
 ];
 
 // تثبيت Service Worker وتخزين الملفات الأساسية
@@ -79,7 +83,7 @@ self.addEventListener('fetch', (event) => {
         })
         .catch(() => {
           return caches.match(request).then((cached) => {
-            return cached || caches.match('/');
+            return cached || caches.match('{{ "/" | relative_url }}');
           });
         })
     );
