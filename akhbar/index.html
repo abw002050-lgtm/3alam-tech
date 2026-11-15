@@ -1,0 +1,71 @@
+---
+layout: default
+title: "أخبار تقنية — آخر المستجدات في عالم التقنية بالعربي"
+description: "أخبار ومقالات تقنية بالعربية — ذكاء اصطناعي، أمان رقمي، خصوصية، وفرص العمل الرقمي. تحليلات عملية تفيد القارئ المبتدئ والمتقدم."
+permalink: /akhbar/
+keywords: "أخبار تقنية, ذكاء اصطناعي, أمان رقمي, خصوصية, تصيد احتيالي, نسخ احتياطي, عمل رقمي"
+---
+
+<div class="page-header reveal">
+  <h1>أخبار تقنية</h1>
+  <p>تحليلات ومقالات تقنية تربطك بآخر المستجدات — ذكاء اصطناعي، أمان، خصوصية، وفرص العمل الرقمي</p>
+  <div class="breadcrumb">
+    <a href="{{ site.baseurl }}/"><i class="fa-solid fa-house"></i> الرئيسية</a>
+    <i class="fa-solid fa-chevron-left"></i>
+    <span>أخبار تقنية</span>
+  </div>
+</div>
+
+<section id="all">
+  <div class="container">
+    <div class="section-title reveal">
+      <h2>كل المقالات</h2>
+      <p>{{ site.categories.أخبار-تقنية.size | default: site.posts.size }} مقالًا تقنيًا</p>
+      <div class="line"></div>
+    </div>
+
+    {% assign akhbar_posts = site.posts | where: "category", "أخبار تقنية" %}
+    {% if akhbar_posts.size > 0 %}
+    <div class="content-grid" id="postsGrid">
+      {% for post in akhbar_posts %}
+      <a href="{{ post.url | prepend: site.baseurl }}" class="content-card reveal"
+         data-title="{{ post.title | escape }}"
+         data-category="{{ post.category | default: '' | escape }}"
+         data-tags="{{ post.tags | join: ' ' | escape }}"
+         data-excerpt="{{ post.excerpt | strip_html | normalize_whitespace | truncatewords: 40 | escape }}">
+        <div class="content-card-thumb" style="background: linear-gradient(135deg, #0ea5e9 0%, #2563eb 100%);">
+          <i class="fa-solid fa-newspaper"></i>
+        </div>
+        <div class="content-card-body">
+          <h3>{{ post.title }}</h3>
+          <p>{{ post.excerpt | strip_html | truncatewords: 15 }}</p>
+          <div class="content-card-meta">
+            <span class="date"><i class="fa-solid fa-calendar"></i> {{ post.date | date: '%Y-%m-%d' }}</span>
+            {% if post.category %}<span><i class="fa-solid fa-folder"></i> {{ post.category }}</span>{% endif %}
+          </div>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+
+    <div class="empty-state" id="noResults" hidden>
+      <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+      <h3>لا توجد نتائج مطابقة</h3>
+      <p id="noResultsText"></p>
+    </div>
+
+    {% else %}
+    <div class="empty-state reveal">
+      <i class="fa-solid fa-newspaper"></i>
+      <h3>لا توجد مقالات بعد</h3>
+      <p>ستُضاف المقالات التقنية قريبًا. تابعنا!</p>
+    </div>
+    {% endif %}
+
+    <div class="reveal" style="margin-top: 40px; text-align: center;">
+      <a href="{{ site.baseurl }}/shuroohat/" class="btn btn-outline">
+        <i class="fa-solid fa-book-open"></i> تصفّح الشروحات التقنية
+      </a>
+    </div>
+  </div>
+</section>
