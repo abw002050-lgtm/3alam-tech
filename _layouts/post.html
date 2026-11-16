@@ -37,8 +37,8 @@ layout: default
       {% assign related = site.posts | where: "category", page.category | where_exp: "item", "item.url != page.url" | limit: 2 %}
       {% for post in related %}
       <a href="{{ post.url | prepend: site.baseurl }}" class="content-card reveal">
-        <div class="content-card-thumb" style="background: var(--gradient);">
-          <i class="fa-solid fa-newspaper"></i>
+        <div class="content-card-thumb" style="background: {{ post.gradient | default: 'var(--gradient)' }};">
+          <i class="fa-solid {{ post.icon | default: 'fa-newspaper' }}"></i>
         </div>
         <div class="content-card-body">
           <h3>{{ post.title }}</h3>
