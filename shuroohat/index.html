@@ -61,8 +61,8 @@ keywords: "شروحات تقنية, شرح أندرويد, شرح WiFi, برمج
          data-category="{{ post.category | default: '' | escape }}"
          data-tags="{{ post.tags | join: ' ' | escape }}"
          data-excerpt="{{ post.excerpt | strip_html | normalize_whitespace | truncatewords: 40 | escape }}">
-        <div class="content-card-thumb" style="background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);">
-          <i class="fa-solid fa-newspaper"></i>
+        <div class="content-card-thumb" style="background: {{ post.gradient | default: 'linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%)' }};">
+          <i class="fa-solid {{ post.icon | default: 'fa-newspaper' }}"></i>
         </div>
         <div class="content-card-body">
           <h3>{{ post.title }}</h3>
