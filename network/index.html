@@ -1,0 +1,61 @@
+---
+layout: default
+title: "شروحات الشبكات والإنترنت — WiFi، راوتر، ومودمات"
+description: "شروحات شبكات بالعربي: إعداد راوتر WiFi، حل مشاكل الشبكة، ضبط المودمات، ومقارنة مشغلي الإنترنت — أدلة عملية خطوة بخطوة."
+permalink: /network/
+keywords: "شروحات شبكات, اعداد راوتر, مشاكل wifi, ضبط مودم, انترنت اليمن, شبكة لاسلكية"
+category_filter: "شبكات"
+---
+
+<div class="page-header reveal">
+  <h1>شروحات الشبكات</h1>
+  <p>WiFi، راوتر، مودمات، ومشاكل الاتصال — حلول عملية خطوة بخطوة</p>
+  <div class="breadcrumb">
+    <a href="{{ site.baseurl }}/"><i class="fa-solid fa-house"></i> الرئيسية</a>
+    <i class="fa-solid fa-chevron-left"></i>
+    <a href="{{ site.baseurl }}/shuroohat/">شروحات</a>
+    <i class="fa-solid fa-chevron-left"></i>
+    <span>شبكات</span>
+  </div>
+</div>
+
+<section>
+  <div class="container">
+    {% assign posts = site.posts | where: "category", page.category_filter %}
+    <div class="section-title reveal">
+      <h2>كل شروحات الشبكات</h2>
+      <p>{{ posts.size }} شرحًا متاحًا</p>
+      <div class="line"></div>
+    </div>
+
+    {% if posts.size > 0 %}
+    <div class="content-grid">
+      {% for post in posts %}
+      <a href="{{ post.url | prepend: site.baseurl }}" class="content-card reveal">
+        <div class="content-card-thumb" style="background: {{ post.gradient | default: 'linear-gradient(135deg, #0ea5e9 0%, #2563eb 100%)' }};">
+          <i class="fa-solid {{ post.icon | default: 'fa-wifi' }}"></i>
+        </div>
+        <div class="content-card-body">
+          <h3>{{ post.title }}</h3>
+          <p>{{ post.excerpt | strip_html | truncatewords: 18 }}</p>
+          <div class="content-card-meta">
+            <span class="date"><i class="fa-solid fa-calendar"></i> {{ post.date | date: '%Y-%m-%d' }}</span>
+          </div>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty-state reveal">
+      <i class="fa-solid fa-wifi"></i>
+      <h3>لا توجد شروحات بعد</h3>
+    </div>
+    {% endif %}
+
+    <div class="reveal" style="margin-top: 40px; text-align: center;">
+      <a href="{{ site.baseurl }}/shuroohat/" class="btn btn-outline">
+        <i class="fa-solid fa-arrow-left"></i> جميع الشروحات
+      </a>
+    </div>
+  </div>
+</section>

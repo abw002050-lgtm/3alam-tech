@@ -49,8 +49,21 @@
     "dateModified": "{{ page.date | date_to_xmlschema }}",
     "inLanguage": "ar",
     "mainEntityOfPage": "{{ page.url | absolute_url }}",
+    "wordCount": {{ page.content | strip_html | number_of_words }},
+    "timeRequired": "PT{{ page.content | strip_html | number_of_words | divided_by: 200 | at_least: 1 }}M",
     {% if page.category %}"articleSection": "{{ page.category }}",{% endif %}
     {% if page.tags %}"keywords": {{ page.tags | jsonify }}{% endif %}
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "الرئيسية", "item": "{{ site.url }}{{ site.baseurl }}/" },
+      { "@type": "ListItem", "position": 2, "name": "شروحات", "item": "{{ site.url }}{{ site.baseurl }}/shuroohat/" },
+      { "@type": "ListItem", "position": 3, "name": "{{ page.title }}", "item": "{{ page.url | absolute_url }}" }
+    ]
   }
   </script>
   {% elsif page.layout == 'project' %}
