@@ -65,6 +65,33 @@
   line-height: 1.8;
 }
 
+.taiz-highlights {
+  list-style: none;
+  margin: 26px auto 0;
+  padding: 0;
+  max-width: 620px;
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.taiz-highlights li {
+  background: rgba(59, 157, 255, 0.10);
+  border: 1px solid rgba(59, 157, 255, 0.28);
+  color: var(--text-primary);
+  border-radius: 999px;
+  padding: 9px 18px;
+  font-size: 0.98rem;
+  font-weight: 600;
+  font-family: 'Cairo', sans-serif;
+}
+
+.taiz-highlights li:last-child {
+  background: rgba(59, 157, 255, 0.20);
+  border-color: #3b9dff;
+}
+
 .taiz-box {
   background: var(--bg-card);
   border-radius: var(--radius);
