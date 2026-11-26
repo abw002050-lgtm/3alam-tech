@@ -110,7 +110,7 @@ backToTopBtn && backToTopBtn.addEventListener('click', () => {
 });
 
 // ===== أنيميشن الظهور عند التمرير =====
-// threshold: 0 ضروري — المحتوىات الطويلة (مقال كامل) لا يمكن أن تُ露出 15% منها على شاشة الجوال
+// threshold: 0 ضروري — المحتوى الطويل (مقال كامل) لا يمكن أن يظهر 15% منه على شاشة الجوال
 const revealEls = document.querySelectorAll('.reveal');
 
 if ('IntersectionObserver' in window) {
